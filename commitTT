@@ -1,0 +1,45 @@
+
+# Please enter the commit message for your changes. Lines starting
+# with '#' will be ignored, and an empty message aborts the commit.
+#
+# On branch main
+# Your branch is up to date with 'origin/main'.
+#
+# Changes to be committed:
+#	new file:   .idea/.gitignore
+#	new file:   .idea/.name
+#	new file:   .idea/inspectionProfiles/Project_Default.xml
+#	new file:   .idea/inspectionProfiles/profiles_settings.xml
+#	new file:   .idea/misc.xml
+#	new file:   .idea/modules.xml
+#	new file:   .idea/wppbot.iml
+#	new file:   __pycache__/arquivos.cpython-310.pyc
+#	new file:   __pycache__/arquivos.cpython-311.pyc
+#	new file:   __pycache__/dados.cpython-310.pyc
+#	new file:   __pycache__/dados.cpython-311.pyc
+#	new file:   __pycache__/main.cpython-310.pyc
+#	new file:   __pycache__/twitter_bot.cpython-310.pyc
+#	new file:   __pycache__/twitter_bot.cpython-311.pyc
+#	new file:   arquivos.py
+#	new file:   br-sem-acentos.txt
+#	new file:   br-utf8.txt
+#	new file:   dados.py
+	new file:   gitignore
+#	new file:   lib/converter_listas.py
+#	new file:   lib/desativado
+#	new file:   lib/ids_tw
+#	new file:   lib/ig_num
+#	new file:   lib/ig_pass
+#	new file:   lib/login
+#	new file:   lib/menu
+#	new file:   lib/palavras
+#	new file:   lib/prefix
+#	new file:   lib/simi
+#	new file:   lib/simi_login
+#	new file:   main.py
+#	new file:   palavras
+#	new file:   requirements.txt
+#	new file:   teste.py
+#	new file:   twitter_bot.py
+#	new file:   youtube-dl.exe
+ok
