@@ -1,4 +1,23 @@
+import threading
+from selenium import webdriver
+from webdriver_manager.chrome import ChromeDriverManager
+from selenium.webdriver.chrome.service import Service as ChromeService
+import pyperclip
+from colorama import *
+from selenium.webdriver.common.action_chains import ActionChains
+from selenium.webdriver.common.keys import Keys
+from selenium.common.exceptions import NoSuchElementException
+import tweepy as tw
+import os
+import random
+import time
+import arquivos
+import requests
+from dados import api_key, api_sec_key, main_token, main_token_sec, b_token
+from ast import literal_eval
+
 # MENSAGEM
+
 
 def comando_atual(num_conv, desativado, lista_msgs, lista_num_adm, prefix, msg):
     tem_prefixo = conferir_prefixo(msg, prefix)
@@ -14,7 +33,7 @@ def comando_atual(num_conv, desativado, lista_msgs, lista_num_adm, prefix, msg):
                 menu_msg = arquivos.ler_escrever(prefix, 'menu')
                 send_msg(menu_msg)
             elif msg == 'conv':
-                send_msg('Número da conversa no chat: '+ str(num_conv))
+                send_msg('Número da conversa no chat: ' + str(num_conv))
             elif msg in ["desativar", "off"]:
                 nome, numero = coletas()
                 if not conferir_login(numero): send_msg(lista_msgs[2]); sair(2); return
@@ -177,8 +196,10 @@ def comando_atual(num_conv, desativado, lista_msgs, lista_num_adm, prefix, msg):
                 ig_pass = literal_eval(arquivos.ler_semfiltro('ig_pass'))
                 try:
                     num = ig_num[ig]
-                    send_msg(f"O usuario {ig} ja tem um número registrado na nossa base de dados!\nIG: *{ig}*\nNúmero: *{num}*")
-                    send_msg(f'Para mudar o numero use o comando {prefix}log [seu usuario aqui]/[sua senha aqui] que o bot fará o novo registro (Caso esqueça a senha entre em contato com o administrador do bot:\nhttps://wa.me/5561981316353')
+                    send_msg(
+                        f"O usuario {ig} ja tem um número registrado na nossa base de dados!\nIG: *{ig}*\nNúmero: *{num}*")
+                    send_msg(
+                        f'Para mudar o numero use o comando {prefix}log [seu usuario aqui]/[sua senha aqui] que o bot fará o novo registro (Caso esqueça a senha entre em contato com o administrador do bot:\nhttps://wa.me/5561981316353')
                 except KeyError:
                     ig_pass[ig] = senha
                     ig_num[ig] = numero
@@ -209,7 +230,8 @@ def comando_atual(num_conv, desativado, lista_msgs, lista_num_adm, prefix, msg):
                     else:
                         send_msg("Seu número atual já está registrado! Faça bom proveito😁")
                 except IndexError:
-                    send_msg(f"Não consegui achar seu registro aqui :(\nNão tem problema, use o codigo '{prefix}reg' para se registrar! confira o menu.")
+                    send_msg(
+                        f"Não consegui achar seu registro aqui :(\nNão tem problema, use o codigo '{prefix}reg' para se registrar! confira o menu.")
             elif msg in ['%', 'cupido', 'cup']:
                 if arg is None: send_msg(lista_msgs[1]); sair(2); return
                 send_msg("Verificando compatibilidade!")
@@ -237,7 +259,7 @@ def comando_atual(num_conv, desativado, lista_msgs, lista_num_adm, prefix, msg):
             elif msg in ['calc', 'calculadora']:
                 if arg is None: send_msg(lista_msgs[1]); sair(2); return
                 try:
-                    sinais = ['+','-','*','^','//', '/']
+                    sinais = ['+', '-', '*', '^', '//', '/']
                     dados = ''
                     sinal = ''
                     for sinal in sinais:
@@ -300,7 +322,8 @@ def comando_atual(num_conv, desativado, lista_msgs, lista_num_adm, prefix, msg):
                     send_msg("Erro ao fazer figurinha, tente novamente mais tarde")
 
             else:
-                send_msg(f'Desculpe, o comando "{prefix}{msg}" ainda não esta registrado! \nVerifique os comandos existentes com "{prefix}menu"')
+                send_msg(
+                    f'Desculpe, o comando "{prefix}{msg}" ainda não esta registrado! \nVerifique os comandos existentes com "{prefix}menu"')
         else:
             print(f'{cor("info")}Imagem detectada!')
             mark_read(num_conv)
@@ -454,7 +477,8 @@ def len_icon(num_conv):
 
 
 def conselho():
-    frases = ['Aqui vai o conselho do dia!', 'E o conselho do dia é...', 'La vai conselho', 'Se liga nessa...', 'Lá vai']
+    frases = ['Aqui vai o conselho do dia!', 'E o conselho do dia é...', 'La vai conselho', 'Se liga nessa...',
+              'Lá vai']
     response = literal_eval(requests.request('GET', 'https://api.adviceslip.com/advice').text)['slip']['advice']
     responsept = translate(response, 'auto', 'pt-br')[0]
     text = f'{random.choice(frases)}\n\nPT: *{responsept}*\nEN: *{response}*'
@@ -500,14 +524,15 @@ def download_img(apagar=False):
         arquivo = os.listdir('src')[0]
         os.remove(f'src/{arquivo}')
 
+
 ##################################################################
 # TWITTER:
 
 def tw_post(texto: str):
-    bot.create_tweet(text = texto)
+    bot.create_tweet(text=texto)
 
 
-def tw_ids(tw_id = None, get = False):
+def tw_ids(tw_id=None, get=False):
     if tw_id is None: get = True
     with open('lib/ids_tw', 'r') as f:
         old_ids = f.readlines()
@@ -519,7 +544,6 @@ def tw_ids(tw_id = None, get = False):
                     file.writelines(str(tw_id) + '\n')
         else:
             return old_ids
-
 
 
 def get_tw_info(usuario: str):
@@ -542,6 +566,7 @@ def get_tw_info(usuario: str):
     except Exception:
         return 'Error'
 
+
 def check_tw_new():
     try:
         mention = api.mentions_timeline()
@@ -555,15 +580,19 @@ def check_tw_new():
                 usr_loc = json['user']['location']
                 id_tw_rpl = json['in_reply_to_status_id']
                 name_tw_rpl = json['in_reply_to_screen_name']
-                try: vd_leg = bot.get_tweet(id_tw_rpl)[0].text
-                except Exception: vd_leg = ''
+                try:
+                    vd_leg = bot.get_tweet(id_tw_rpl)[0].text
+                except Exception:
+                    vd_leg = ''
                 print(cor('info') + f'Nova Menção de {name_tw} detectada!')
                 ig_num = literal_eval(arquivos.ler_semfiltro('ig_num'))
                 try:
                     num = ig_num[ig_tw]
-                    try: bot.create_tweet(in_reply_to_tweet_id=id_tw, text=f'Salve {name_tw}\n\nIrei enviar o video no seu '
-                                                                           f'Whatsapp ((**) *.****-{num[9:]})\nEsse não é'
-                                                                           f' seu número? Envie uma mensagem a mim.')
+                    try:
+                        bot.create_tweet(in_reply_to_tweet_id=id_tw,
+                                         text=f'Salve {name_tw}\n\nIrei enviar o video no seu '
+                                              f'Whatsapp ((**) *.****-{num[9:]})\nEsse não é'
+                                              f' seu número? Envie uma mensagem a mim.')
                     except tw.errors.Forbidden:
                         tw_ids(id_tw)
                         pass
@@ -579,23 +608,27 @@ def check_tw_new():
                     tw_link = f'https://twitter.com/{name_tw_rpl}/status/{id_tw_rpl}'
                     video_name = f"{name_tw_rpl}´s_video_{ig_tw}´request_all_by_Ezn"
                     os.system(f'youtube-dl -o src/{video_name}.mp4 --retries 3 {tw_link}')
-                    try: send_media(vd_leg)
+                    try:
+                        send_media(vd_leg)
                     except IndexError:
                         bot.create_tweet(in_reply_to_tweet_id=id_tw, text='Ocorreu um Erro :/\nCertifique-se que para'
-                                                                              ' baixar midias a midia seja um video. Para baixar imagens'
-                                                                              'você pdode entrar nas opções da imagens ao clicar nela (tres pontos) e após apertar em salvar, '
-                                                                              'ou simplesmente tirar print.')
-                        send_msg('Ocorreu um Erro :/\nCertifique-se que para baixar midias a midia seja um video. Para baixar imagens você pode entrar nas opções da imagens ao clicar nela (tres pontos) e após apertar em salvar ou simplesmente tirar print.')
+                                                                          ' baixar midias a midia seja um video. Para baixar imagens'
+                                                                          'você pdode entrar nas opções da imagens ao clicar nela (tres pontos) e após apertar em salvar, '
+                                                                          'ou simplesmente tirar print.')
+                        send_msg(
+                            'Ocorreu um Erro :/\nCertifique-se que para baixar midias a midia seja um video. Para baixar imagens você pode entrar nas opções da imagens ao clicar nela (tres pontos) e após apertar em salvar ou simplesmente tirar print.')
                         tw_ids(id_tw)
                         break
 
                     arquivo = os.listdir('src')[0]
                     os.remove(f'src/{arquivo}')
                 except KeyError:
-                    bot.create_tweet(text=f'Olá {name_tw}\nInfelizmente não encontrei seu numero na minha base de dados,'
-                                          f' mas não tem problema, use este comando no meu whatsapp para fazer seu registro!'
-                                          f'\n\n{prefix}reg {ig_tw}/[seu número]/[crie uma senha]\nOu\nUse este link para registrar: '
-                                          f'https://wa.me/556196884447?text={prefix}reg%20{ig_tw}%20%2F%20%5BCrie%20uma%20senha%5D', in_reply_to_tweet_id=id_tw)
+                    bot.create_tweet(
+                        text=f'Olá {name_tw}\nInfelizmente não encontrei seu numero na minha base de dados,'
+                             f' mas não tem problema, use este comando no meu whatsapp para fazer seu registro!'
+                             f'\n\n{prefix}reg {ig_tw}/[seu número]/[crie uma senha]\nOu\nUse este link para registrar: '
+                             f'https://wa.me/556196884447?text={prefix}reg%20{ig_tw}%20%2F%20%5BCrie%20uma%20senha%5D',
+                        in_reply_to_tweet_id=id_tw)
                 except Exception as e:
                     try:
                         print(f'Error no twitter! \n {e}')
@@ -610,10 +643,9 @@ def check_tw_new():
     except IndexError:
         pass
     except Exception as e:
-        print(cor('erro')+f'Erro ao conferir novos tweets.\n{e}')
+        print(cor('erro') + f'Erro ao conferir novos tweets.\n{e}')
     time.sleep(1)
     sair()
-
 
 
 ###################################################################
@@ -634,7 +666,8 @@ def abrir_f_conv(num_conv):
 
 def click_msg():
     len_msgs = len_msg()
-    colet('xpath', f'/html/body/div[1]/div/div/div[4]/div/div[2]/div/div[2]/div[3]/div[{len_msgs}]/div/div/div[1]/div[1]/div[1]/div[1]').click()
+    colet('xpath',
+          f'/html/body/div[1]/div/div/div[4]/div/div[2]/div/div[2]/div[3]/div[{len_msgs}]/div/div/div[1]/div[1]/div[1]/div[1]').click()
 
 
 def click_unread(num_conv):
@@ -669,7 +702,7 @@ def abas(url, is_close=False):
 
 # MAIN
 
-def sair(qnt_esc = 0, esc = False):
+def sair(qnt_esc=0, esc=False):
     try:
         if esc is True:
             raise Exception
@@ -685,9 +718,12 @@ def mud_desc(txt):
     tecla = ActionChains(driver)
     colet('xpath', '/html/body/div[1]/div/div/div[3]/header/div[1]/div/div').click()
     time.sleep(0.25)
-    colet('xpath', '/html/body/div[1]/div/div/div[2]/div[1]/span/div/span/div/div/div[4]/div[2]/div/span[2]/button').click()
+    colet('xpath',
+          '/html/body/div[1]/div/div/div[2]/div[1]/span/div/span/div/div/div[4]/div[2]/div/span[2]/button').click()
     tecla.key_down(Keys.CONTROL).key_down('a').send_keys(Keys.BACKSPACE).key_up(Keys.CONTROL).key_up('a').perform()
-    colet('xpath', '/html/body/div[1]/div/div/div[2]/div[1]/span/div/span/div/div/div[4]/div[2]/div[1]/div[1]/div/div[2]').send_keys(txt)
+    colet('xpath',
+          '/html/body/div[1]/div/div/div[2]/div[1]/span/div/span/div/div/div[4]/div[2]/div[1]/div[1]/div/div[2]').send_keys(
+        txt)
     tecla.send_keys(Keys.ENTER).perform()
     time.sleep(1)
     sair(2)
@@ -734,7 +770,6 @@ def calc(sinal, num):
     return resposta
 
 
-
 def covid():
     headers = {
         "X-RapidAPI-Key": "19318e22c3msh19d2d66c759bad6p14faf4jsn1f3f58714d21",
@@ -757,8 +792,11 @@ def covid():
 
 def lover(nomes: list):
     dados = {"sname": nomes[0], "fname": nomes[1]}
-    headers = {"X-RapidAPI-Key": "19318e22c3msh19d2d66c759bad6p14faf4jsn1f3f58714d21", "X-RapidAPI-Host": "love-calculator.p.rapidapi.com"}
-    response = literal_eval(requests.request("GET", "https://love-calculator.p.rapidapi.com/getPercentage", headers=headers, params=dados).text)
+    headers = {"X-RapidAPI-Key": "19318e22c3msh19d2d66c759bad6p14faf4jsn1f3f58714d21",
+               "X-RapidAPI-Host": "love-calculator.p.rapidapi.com"}
+    response = literal_eval(
+        requests.request("GET", "https://love-calculator.p.rapidapi.com/getPercentage", headers=headers,
+                         params=dados).text)
     return f"Bem vindo ao cupido!\nA compatibilidade de {nomes[0]} com {nomes[1]} é {response['percentage']}%"
 
 
@@ -791,7 +829,7 @@ def send_fig():
     time.sleep(1)
 
 
-def send_media(legenda = ''):
+def send_media(legenda=''):
     path_clip = '/html/body/div[1]/div/div/div[4]/div/footer/div[1]/div/span[2]/div/div[1]/div[2]/div/div/span'
     path_img = '/html/body/div[1]/div/div/div[4]/div/footer/div[1]/div/span[2]/div/div[1]/div[2]/div/span/div/div/ul/li[1]/button/input'
     path_env = '/html/body/div[1]/div/div/div[2]/div[2]/span/div/span/div/div/div[2]/div/div[2]/div[2]/div/div'
@@ -880,7 +918,6 @@ def Whatsapp(desativado, prefix, one_once: bool, lista_msgs):
         check_wpp_new(lista_msgs)
 
 
-
 def coletar_num_convs_main():
     len_conversas = len_conv()
     for num_conv in range(1, len_conversas + 1):
@@ -934,7 +971,7 @@ def check_wpp_new(lista_msgs):
             main(desativado, prefix, lista_msgs)
 
 
-def login(logged = False):
+def login(logged=False):
     while not logged:
         logged = conf_qr()
 
@@ -952,29 +989,14 @@ def main(desativado, prefix, lista_msgs):
     except Exception as e:
         try:
             send_msg("Error! enviando log para o administrador, perdão por isso.")
-        except Exception: pass
+        except Exception:
+            pass
         finally:
             print(cor('Erro geral!\n') + str(e))
             time.sleep(1)
             main(desativado, prefix, lista_msgs)
 
-import threading
-from selenium import webdriver
-from webdriver_manager.chrome import ChromeDriverManager
-from selenium.webdriver.chrome.service import Service as ChromeService
-import pyperclip
-from colorama import *
-from selenium.webdriver.common.action_chains import ActionChains
-from selenium.webdriver.common.keys import Keys
-from selenium.common.exceptions import NoSuchElementException
-import tweepy as tw
-import os
-import random
-import time
-import arquivos
-import requests
-from dados import api_key, api_sec_key, main_token, main_token_sec, b_token
-from ast import literal_eval
+
 driver = webdriver.Chrome(service=ChromeService(ChromeDriverManager().install()))
 lista_num_adm = []
 lista_main_group = []
@@ -989,10 +1011,10 @@ if __name__ == "__main__":
     prefix = arquivos.ler_escrever(None, 'prefix')
     desativado = conferir_desativado(prefix)
     lista_msgs = [f'Bot desligado, tente novamente mais tarde com "{prefix}menu"',
-    f"Erro!\nVerifique o uso do comando com {prefix}menu",
-    "Apenas administradores podem usar esse comando, como descobriu hein?",
-    f'Olá, Bot on, envie "menu" para ver a lista de comandos. prefixo: {prefix}\n',
-    "Esse comando só pode ser usado na legenda de uma foto."]
+                  f"Erro!\nVerifique o uso do comando com {prefix}menu",
+                  "Apenas administradores podem usar esse comando, como descobriu hein?",
+                  f'Olá, Bot on, envie "menu" para ver a lista de comandos. prefixo: {prefix}\n',
+                  "Esse comando só pode ser usado na legenda de uma foto."]
     one_once = True
     try:
         Whatsapp(desativado, prefix, one_once, lista_msgs)
