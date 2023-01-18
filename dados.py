@@ -1,0 +1,8 @@
+api_key = '7WnLAYpWj3vjk3MMZZUDpbHxc'
+api_sec_key = 'zBLhy5AEGDts8L7ypYa0OHZPwLvblvOPqf4ukeYZVWkhRM4jfK'
+b_token = 'AAAAAAAAAAAAAAAAAAAAAKcDlAEAAAAApEB6RbObuywzJflQsOTrhwNdHAc%3Db3z3NwOKKHc8R31raFT1lec3fziHZ7KZAv7w6hkyFa4A7MexpM'
+main_token = '1610384642414198785-VkGLvSHbPe8aC2AxUXC7JyPwpHwUKV'
+main_token_sec = 'jpCyOUH4mjgKsNY9kC29cWY6z4TKrjzoJrV9t0VJ3u50L'
+client_id = 'NTdMZXJ0YWNkRllrWU5rYlZhLTU6MTpjaQ'
+client_id_sec = 'fzhsW3aHeIHtos9XHykzyF6PzquUFgjmKRX_vCaGoewApoTFsp'
+my_id = '1610384642414198785'

@@ -1,0 +1,118 @@
+╔═══════════════╗
+        *Bem Vindo(a)!*
+╚═══════════════╝
+
+⥤ Prefixo: "{prefix}"
+➭ Comando: _*{prefix}Menu*_
+        Funcionalidade: Exibe (este) menu de ajuda.
+        Uso: Basta enviar.
+
+
+   • ──── 𖦜 ──── •
+⚡*_PRINCIPAIS COMANDOS_*⚡
+    • ──── 𖦜 ──── •
+
+
+➭ Comando: _*{prefix}f*_ ou _*{prefix}fig*_
+        Funcionalidade: Faz uma figurinha.
+        Uso: Envie como legenda da foto que deseja fazer a figurinha.
+
+➭ Comando: _*{prefix}Nome*_
+        Funcionalidade: Eu respondo o seu nome.
+        Uso: Basta enviar.
+
+➭ Comando: _*{prefix}Diga*_
+        Funcionalidade: Eu falo o que voce quiser.
+        Uso: {prefix}Diga [o que voce deseja que eu diga].
+
+➭ Comando: _*{prefix}Pergunta*_
+        Funcionalidade: Respondo sua pergunta.
+        Uso: {prefix}pergunta [sua pergunta].
+
+➭ Comando: _*{prefix}Dado*_
+        Funcionalidade: Envio um numero aleatorio entre 1 e 6.
+        Uso: Basta enviar.
+
+➭ Comando: _*{prefix}Prefixo*_
+        Funcionalidade: Mostra o prefixo.
+        Uso: Basta enviar.
+
+➭ Comando: _*{prefix}conversa*_
+        Funcionalidade: Eu converso com vc.
+        Uso: {prefix}conversa [1 para ligar e 0 para desligar o modo conversa].
+
+➭ Comando: _*{prefix}cupido*_
+        Funcionalidade: Diz qual é a compatibilidade de duas pessoas no amor.
+        Uso: {prefix}cupido [nome da pessoa 1]/[nome da pessoa 2]
+
+➭ Comando: _*{prefix}conselho*_
+        Funcionalidade: Bot te dará um conselho aleatorio.
+        Uso: Basta enviar.
+
+➭ Comando: _*{prefix}recado*_
+        Funcionalidade: Envia um recado para o adm do bot (pode ser usado para reportar falhas ou bugs).
+        Uso: {prefix}recado [seu recado].
+
+
+• ──── 𖦜 ──── •
+⚡*_CALCULADORA_*⚡
+• ──── 𖦜 ──── •
+
+➭ Comando: _*{prefix}calc*_
+        Funcionalidade: Faz calculos matemáticos simples.
+        Uso: {prefix}calc [número 1][operação][número 2].
+        Operações:
+           adição(+)
+           subtração(-)
+           divisão(/)
+           multiplicação(*)
+           potenciação(^)
+           divisão exata(//)
+        Obs: ainda não é possivel fazer contas com numeros negativos
+
+
+• ──── 𖦜 ──── •
+  ⚡*_MIDIAS_*⚡
+• ──── 𖦜 ──── •
+
+➭ Comando: _*{prefix}img*_
+        Funcionalidade: Reenvia uma foto.
+        Uso: Envie como legenda da foto que deseja reenviar.
+
+
+• ──── 𖦜 ──── •
+ ⚡*_TRADUTOR_*⚡
+• ──── 𖦜 ──── •
+
+➭ Comando: _*{prefix}tradutoren*_
+        Funcionalidade: Traduzo coisas de qualquer linguagem para o ingles.
+        Uso: {prefix}tradutoren [palavra para traduzir].
+
+➭ Comando: _*{prefix}tradutorpt*_
+        Funcionalidade: Traduzo coisas de qualquer linguagem para o portugues.
+        Uso: {prefix}tradutorpt [palavra para traduzir].
+
+
+⠀   • ──── 𖦜 ──── •
+ ⚡*_COMANDOS DO TWITTER_*⚡
+⠀   • ──── 𖦜 ──── •
+
+➭ Comando: _*{prefix}twitter*_
+        Funcionalidade: Pesquisa informações sobre um usúario do twitter.
+        Uso: {prefix}twitter [user('@') da pessoa].]
+
+➭ Comando: _*{prefix}reg*_
+        Funcionalidade: Faz seu registro na base de dados para usar o bot do twitter.
+        Uso: {prefix}reg [Seu ig(@)] / [Crie uma senha].
+        Obs: A senha pode ser ultilizada futuramente para caso haja troca de número.
+
+➭ Comando: _*{prefix}log*_
+        Funcionalidade: Em caso esteja com um novo número, ele faz o registro no novo número.
+        Uso: {prefix}reg [Seu ig(@)] / [Insira a senha criada].
+
+
+
+‼️*_BOT AINDA EM DESEMVOLVIMENTO, APENAS UM PROTOTIPO_*‼️
+
+Info: Feito em Python, usando selenium. Feito para fins estudantis.
+By: Ezn (https://wa.me/5561981316353)
